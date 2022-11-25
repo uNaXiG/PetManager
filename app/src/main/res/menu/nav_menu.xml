@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="功能">
+        <menu>
+            <item
+                android:id="@+id/item_info"
+                android:icon="@drawable/account_name"
+                android:title="個人資料" />
+            <item
+                android:id="@+id/item_add"
+                android:icon="@drawable/pet_manager"
+                android:title="登錄寵物" />
+            <item
+                android:id="@+id/item_healthy"
+                android:icon="@drawable/healthy"
+                android:title="健康管理" />
+            <item
+                android:id="@+id/item_analyze"
+                android:icon="@drawable/mood_analyze"
+                android:title="情緒分析" />
+            <item
+                android:id="@+id/item_diary"
+                android:icon="@drawable/account_calendar"
+                android:title="日記小角落" />
+        </menu>
+    </item>
+
+
+    <item android:title="系統">
+        <menu>
+            <item
+                android:id="@+id/item_setting"
+                android:icon="@drawable/setting"
+                android:title="設置" />
+            <item
+                android:id="@+id/item_contact"
+                android:icon="@drawable/account_email"
+                android:title="聯絡我們" />
+            <item
+                android:id="@+id/item_exit"
+                android:icon="@drawable/exit"
+                android:title="登出" />
+        </menu>
+    </item>
+</menu>

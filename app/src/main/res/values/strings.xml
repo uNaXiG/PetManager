@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">PetManage</string>
+    <string name="forget_pwd"><u>Forget Password ?</u></string>
+    <string-array name="petspecies_array">
+        <item>Select Pet Species</item>
+        <item>Dog</item>
+        <item>Cat</item>
+        <item>Bird</item>
+        <item>Rabbit</item>
+        <item>Rat</item>
+        <item>Monkey</item>
+        <item>Bear</item>
+        <item>Pig</item>
+        <item>Turtle</item>
+        <item>Snake</item>
+        <item>Others</item>
+    </string-array>
+    <!-- 圓形圖片 -->
+    <style name="circleImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:screenOrientation="portrait"
+    tools:context=".RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/title_layout"
+        android:background="#ACFCE0A0"
+        android:orientation="vertical">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/pic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            android:padding="1dp"
+            android:src="@drawable/icon"
+            app:shapeAppearanceOverlay="@style/circleImageStyle"
+            app:strokeColor="#999"
+            app:strokeWidth="2dp" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/user_level"
+            android:textSize="14dp"
+            android:textColor="#777"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/iv_avatar"
+            android:text="銀牌飼主 | Lv. 5" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scroll1"
+        android:layout_below="@+id/title_layout"
+        android:scrollbars="vertical"
+        android:fadingEdge="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/third_layout"
+                android:layout_below="@+id/title_layout"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_margin="15dp"
+                    android:layout_below="@+id/user_name"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:textColor="#555"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  帳號資訊  " />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_days_layout"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/third_layout"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_below="@+id/next_layout">
+                    <!--天數-->
+                    <TextView
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_below="@+id/user_name"
+                        android:textSize="18dp"
+                        android:textColor="#555"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="登入天數" />
+
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="40dp"
+                        android:id="@+id/login_days"
+                        android:textSize="18dp"
+                        android:textColor="#777"
+                        android:textAlignment="textEnd"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="15 Days" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pets_layout"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/login_days_layout"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_below="@+id/next_layout">
+                    <!--飼養數量-->
+                    <TextView
+                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_below="@+id/user_name"
+                        android:textSize="18dp"
+                        android:textColor="#555"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="登錄寵物數量" />
+
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="40dp"
+                        android:id="@+id/pets_count"
+                        android:textSize="18dp"
+                        android:textColor="#777"
+                        android:textAlignment="textEnd"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4 隻" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/reg_date_layout"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/pets_layout"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_below="@+id/next_layout">
+                    <!--飼養數量-->
+                    <TextView
+                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_below="@+id/user_name"
+                        android:textSize="18dp"
+                        android:textColor="#555"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="註冊日期" />
+
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="40dp"
+                        android:id="@+id/reg_date"
+                        android:textSize="18dp"
+                        android:textColor="#777"
+                        android:textAlignment="textEnd"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2022-11-23" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/next_layout"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/reg_date_layout"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center">
+                    <!--名稱-->
+                    <TextView
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_below="@+id/user_name"
+                        android:textSize="18dp"
+                        android:textColor="#555"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="名 稱" />
+
+                    <EditText
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="30dp"
+                        android:maxLines="1"
+                        android:id="@+id/user_name"
+                        android:paddingRight="20dp"
+                        android:textSize="18dp"
+                        android:textColor="#777"
+                        android:textAlignment="textEnd"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="廖宥翔" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/account_layout"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/next_layout"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_below="@+id/next_layout">
+                    <!--帳號-->
+                    <TextView
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_below="@+id/user_name"
+                        android:textSize="18dp"
+                        android:textColor="#555"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="帳 號" />
+
+                    <EditText
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:maxLines="1"
+                        android:layout_marginRight="30dp"
+                        android:id="@+id/user_account"
+                        android:paddingRight="20dp"
+                        android:textSize="18dp"
+                        android:textColor="#777"
+                        android:textAlignment="textEnd"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="test" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/email_layout"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/account_layout"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_below="@+id/account_layout">
+                    <!--Email-->
+                    <TextView
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_below="@+id/user_name"
+                        android:textSize="18dp"
+                        android:textColor="#555"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="信 箱" />
+
+                    <EditText
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="30dp"
+                        android:maxLines="1"
+                        android:id="@+id/user_email"
+                        android:textSize="18dp"
+                        android:textColor="#777"
+                        android:paddingRight="20dp"
+                        android:textAlignment="textEnd"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="test@gmail.com" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/reg_date_layout"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+                    <!--名稱-->
+                    <TextView
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="45dp"
+                        android:textSize="18dp"
+                        android:textColor="#555"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="性別" />
+
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="30dp"
+                        android:maxLines="1"
+                        android:id="@+id/user_gender"
+                        android:paddingRight="40dp"
+                        android:textSize="18dp"
+                        android:textColor="#777"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="男" />
+                    <TextView
+                        android:maxLines="1"
+                        android:paddingRight="20dp"
+                        android:textSize="18dp"
+                        android:textColor="#777"
+                        android:textAlignment="textEnd"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="生日" />
+                    <TextView
+                        android:maxLines="1"
+                        android:id="@+id/user_birthday"
+                        android:textSize="18dp"
+                        android:textColor="#777"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1999-10-10" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btn_layout"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/save_btn"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:padding="10dp"
+            android:text="SAVE"
+            android:textStyle="bold"
+            android:backgroundTint="#80ffffff"
+            android:textColor="#FFEAD070"
+            android:layout_centerHorizontal="true"
+            tools:ignore="MissingConstraints"/>
+
+    </LinearLayout>
+</RelativeLayout>

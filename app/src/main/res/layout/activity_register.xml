@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    android:screenOrientation="portrait"
+    tools:context=".RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_layout"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/reject_code"
+            android:textSize="14dp"
+            android:textColor="#ffff4080"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
+            android:text=""/>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/liner_layout"
+        android:layout_below="@+id/title_layout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/username"
+                android:layout_below="@id/title"
+                android:background="#88ffffff"
+                android:hint="Input your name"
+                android:fontFamily="casual"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:drawableLeft="@drawable/account_name"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                android:padding="10dp" />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/gender_gp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="5dp"
+                android:background="#88ffffff"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="0dp"
+                    android:drawableLeft="@drawable/account_gender"/>
+
+                <RadioButton
+                    android:id="@+id/fmale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:fontFamily="casual"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Fmale"
+                    android:fontFamily="casual"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+            </RadioGroup>
+        </LinearLayout>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/birthday"
+            android:fontFamily="casual"
+            android:gravity="left"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="#70ffffff"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:drawableLeft="@drawable/account_calendar"
+            android:text="Select Your Birthday"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_margin="15dp"/>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_account"
+            android:background="#88ffffff"
+            android:hint="Input account"
+            android:fontFamily="casual"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/account_box"
+            android:drawablePadding="10dp"
+            android:layout_margin="15dp"
+            android:padding="10dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/password"
+            android:layout_below="@id/username"
+            android:background="#88ffffff"
+            android:hint="input password"
+            android:fontFamily="casual"
+            android:textColorHint="#ff000000"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/account_password"
+            android:drawablePadding="10dp"
+            android:inputType="textPassword"
+            android:layout_margin="15dp"
+            android:padding="10dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/confirm_pwd"
+            android:layout_below="@id/username"
+            android:background="#88ffffff"
+            android:hint="Confirm"
+            android:fontFamily="casual"
+            android:textColorHint="#ff000000"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/account_password"
+            android:drawablePadding="10dp"
+            android:inputType="textPassword"
+            android:layout_margin="15dp"
+            android:padding="10dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/email"
+            android:layout_below="@id/username"
+            android:background="#88ffffff"
+            android:hint="E-mail"
+            android:fontFamily="casual"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/account_email"
+            android:drawablePadding="10dp"
+            android:inputType="textEmailAddress"
+            android:layout_margin="15dp"
+            android:padding="10dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/phone"
+            android:layout_below="@id/username"
+            android:background="#88ffffff"
+            android:hint="Phone"
+            android:fontFamily="casual"
+            android:textColorHint="#ff888888"
+            android:textColor="#ff888888"
+            android:drawableLeft="@drawable/account_phone"
+            android:drawablePadding="10dp"
+            android:inputType="phone"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:padding="10dp" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/use_rule"
+            android:layout_marginRight="15dp"
+
+            android:text="同意使用者條款"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/reg_submit"
+                android:text="next"
+                android:fontFamily="casual"
+                android:textStyle="bold"
+                android:backgroundTint="#80ffffff"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:padding="10dp"
+                android:layout_margin="10dp"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/back"
+                android:text="back"
+                android:fontFamily="casual"
+                android:textStyle="bold"
+                android:backgroundTint="#80ffffff"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:padding="10dp"
+                android:layout_margin="10dp"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password"
+            android:gravity="right"
+            android:id="@+id/print"
+            android:textSize="14dp"
+            android:textColor="#FFFFFF00"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text=""/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</RelativeLayout>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:screenOrientation="portrait"
+    tools:context=".RegisterActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ACFCF0C0"
+        android:scrollbars="vertical"
+        android:fadingEdge="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:id="@+id/first_layout"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="30dp"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="#555"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:drawableLeft="@drawable/pointer_left"
+                android:text="  系統設定  " />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp"
+                android:background="#888"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/notify_layout"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/third_layout"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/next_layout"
+                    android:layout_gravity="center">
+                    <!--通知-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/user_name"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_toEndOf="@+id/iv_avatar"
+                        android:text="通 知"
+                        android:textColor="#555"
+                        android:textSize="18dp" />
+
+                    <Switch
+                        android:id="@+id/notify_sw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_toEndOf="@+id/notify"
+                        android:textColor="#777"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pets_layout"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/notify_layout"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_below="@+id/next_layout">
+                    <!--資料蒐集-->
+                    <TextView
+                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="30dp"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/user_name"
+                        android:textSize="18dp"
+                        android:textColor="#555"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/iv_avatar"
+                        android:text="資 料 蒐 集" />
+
+                    <Switch
+                        android:id="@+id/analyze_sw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_toEndOf="@+id/notify"
+                        android:textColor="#777"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_below="@+id/next_layout">
+                <!--評論-->
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="45dp"
+                    android:textStyle="bold"
+                    android:id="@+id/comment"
+                    android:drawableRight="@drawable/pointer_right"
+                    android:textSize="18dp"
+                    android:textColor="#555"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="評 論" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_below="@+id/next_layout">
+                <!--粉專-->
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="45dp"
+                    android:textStyle="bold"
+                    android:drawableRight="@drawable/pointer_right"
+                    android:textSize="18dp"
+                    android:id="@+id/fans"
+                    android:textColor="#555"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Facebook 粉絲專頁" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="#888"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/use_rule_layout"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/pets_layout"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="horizontal">
+                <!--使用者條款-->
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:padding="10dp"
+                    android:id="@+id/use_rule"
+                    android:text="使用者條款"
+                    android:textStyle="bold"
+                    android:backgroundTint="#80FDF1D0"
+                    android:textColor="#FFE0C060"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/link_layout"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/pets_layout"
+                android:orientation="vertical">
+                <!--政府網頁-->
+                <TextView
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="30dp"
+                    android:textAlignment="textEnd"
+                    android:drawableRight="@drawable/link"
+                    android:drawablePadding="5dp"
+                    android:id="@+id/gov_link"
+                    android:textSize="16dp"
+                    android:textColor="#555"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="晶 片 查 詢 平 台  " />
+                <!--版本-->
+                <TextView
+                    android:textSize="16dp"
+                    android:textColor="#444"
+                    android:textAlignment="textEnd"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text=" 當  前  版  本    v 1.0.1" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="25dp"
+        android:layout_gravity="center">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delete_user_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="#88C00000"
+            android:fontFamily="casual"
+            android:paddingTop="10dp"
+            android:text="刪除帳號"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
