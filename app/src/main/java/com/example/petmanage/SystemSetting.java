@@ -12,12 +12,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+
 public class SystemSetting extends AppCompatActivity {
 
     TextView weblink;
     TextView fanslink;
     TextView comment;
-
+    MaterialButton del_user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +72,15 @@ public class SystemSetting extends AppCompatActivity {
                     }
                 });
                 builder.create().show();
+            }
+        });
+
+        // 刪除帳號 //
+        del_user = (MaterialButton) findViewById(R.id.delete_user_btn);
+        del_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(SystemSetting.this, "DELETE", Toast.LENGTH_SHORT).show();
             }
         });
     }
