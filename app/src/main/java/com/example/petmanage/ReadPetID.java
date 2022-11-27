@@ -23,6 +23,8 @@ import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONException;
@@ -55,12 +57,15 @@ public class ReadPetID extends AppCompatActivity {
     PrintWriter out;
     BufferedReader in;
 
-    String gender;
+    EditText in_pet_id;
+    EditText in_pet_name;
+    String gender="";
     Spinner spinner;
 
     Button birthday;
     DatePickerDialog.OnDateSetListener  mDate;
 
+    MaterialButton submit;
     TextView rej;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +83,8 @@ public class ReadPetID extends AppCompatActivity {
         TextView sys_txt = (TextView) findViewById(R.id.show_text); // 顯示系統提示的字樣
         ImageView btn = (ImageView) findViewById(R.id.show_reader); // 啟動掃描器按鈕
 
+        in_pet_id = (EditText)findViewById(R.id.pet_id);    // 寵物ID
+        in_pet_name = (EditText)findViewById(R.id.pet_name);    // 寵物name
         spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(this,
@@ -145,7 +152,8 @@ public class ReadPetID extends AppCompatActivity {
 
 
         // 送出
-        MaterialButton submit = (MaterialButton) findViewById(R.id.submit);
+        submit = (MaterialButton) findViewById(R.id.submit);
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,9 +161,35 @@ public class ReadPetID extends AppCompatActivity {
                     Toast.makeText(ReadPetID.this, "pet ID format is incorrect ", Toast.LENGTH_SHORT).show();
                     return;
                 }*/
-                InputMethodManager imm = (InputMethodManager) getSystemService(RegisterActivity.INPUT_METHOD_SERVICE); imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-                thread = new Thread(Connection);
-                thread.start();
+                if("".equals(in_pet_id.getEditableText().toString())){
+                    Toast.makeText(ReadPetID.this, "Pet ID have not been filled!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if("".equals(in_pet_name.getEditableText().toString())){
+                    Toast.makeText(ReadPetID.this, "Pet name have not been filled!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if("Select Pet Species".equals(spinner.getSelectedItem().toString())){
+                    Toast.makeText(ReadPetID.this, "Pet species have not been selected!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if("".equals(gender)){
+                    Toast.makeText(ReadPetID.this, "Pet gender have not been selected!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if("Select Birthday".equals(birthday.getText().toString())){
+                    Toast.makeText(ReadPetID.this, "Pet birthday have not been selected!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                /*if("".equals(in_pet_id.getEditableText().toString()) || "".equals(in_pet_name.getEditableText().toString())|| "Select Pet Species".equals(spinner.getSelectedItem().toString())|| "".equals(gender)|| "Select Birthday".equals(birthday.getText().toString())){
+                    Toast.makeText(ReadPetID.this, "There are items that have not been filled!", Toast.LENGTH_SHORT).show();
+                    return;
+                }*/
+                else{
+                    InputMethodManager imm = (InputMethodManager) getSystemService(RegisterActivity.INPUT_METHOD_SERVICE); imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    thread = new Thread(Connection);
+                    thread.start();
+                }
             }
         });
 
@@ -168,6 +202,7 @@ public class ReadPetID extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
     class RadioGroupListener implements RadioGroup.OnCheckedChangeListener {
@@ -207,8 +242,8 @@ public class ReadPetID extends AppCompatActivity {
                 InetAddress host = InetAddress.getByName(server_ip);
                 //建立連線
                 clientSocket = new Socket(host, server_port);
-                EditText in_pet_id = (EditText)findViewById(R.id.pet_id);    // 寵物ID
-                EditText in_pet_name = (EditText)findViewById(R.id.pet_name);    // 寵物name
+                //in_pet_id = (EditText)findViewById(R.id.pet_id);    // 寵物ID
+                //in_pet_name = (EditText)findViewById(R.id.pet_name);    // 寵物name
                 //EditText in_pet_specie = (EditText)findViewById(R.id.pet_specie);    // 寵物種類
                 //EditText in_pet_gender = (EditText)findViewById(R.id.pet_gender);    // 寵物性別???咪咪幫幫忙
 

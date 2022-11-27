@@ -75,14 +75,14 @@ public class EditPersonalInfo extends AppCompatActivity {
         // 頭像 //
         pic = (ShapeableImageView) findViewById(R.id.pic);
         // 開發中 改圖片 //
-        /*pic.setOnClickListener(new View.OnClickListener() {
+        pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, GALLERY_REQ_CODE);
             }
-        });*/
+        });
 
         // 登入天數 //
         TextView login_days = (TextView) findViewById(R.id.login_days);
@@ -189,7 +189,7 @@ public class EditPersonalInfo extends AppCompatActivity {
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 byte[] byte_array = byteArrayOutputStream.toByteArray();
-                encoded_img = Base64.encodeToString(byte_array, Base64.DEFAULT);
+                encoded_img = Base64.encodeToString(byte_array, Base64.NO_WRAP);
                 edited_info += "_img";
                 edited_img = true;
             }
