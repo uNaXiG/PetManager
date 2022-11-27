@@ -76,7 +76,7 @@ public class EditPersonalInfo extends AppCompatActivity {
 
         // 頭像 //
         pic = (ShapeableImageView) findViewById(R.id.pic);
-        // 開發中 改圖片 //
+        // 改圖片 //
         pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
