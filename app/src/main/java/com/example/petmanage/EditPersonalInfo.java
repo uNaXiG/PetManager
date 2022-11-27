@@ -57,7 +57,9 @@ public class EditPersonalInfo extends AppCompatActivity {
     EditText email;
     MaterialButton save_btn;
     boolean need_save = false;
-    String edited_info = "";
+    int edit_account = 0;
+    int edit_email = 0;
+    int edit_pic = 0;
 
     private final int GALLERY_REQ_CODE = 1000;
 
@@ -126,16 +128,14 @@ public class EditPersonalInfo extends AppCompatActivity {
             public void onClick(View view) {
                 if(!uname.getText().toString().equals(setting.Get_reg_name())) need_save = true;
                 if(!account.getText().toString().equals(setting.Get_reg_account())) {
-                    edited_info = "account";
+                    edit_account = 1;
                     need_save = true;
                 }
                 if(!email.getText().toString().equals(setting.Get_reg_email())) {
-                    edited_info += "_email";
+                    edit_email = 1;
                     need_save = true;
                 }
-                if(edited_img) need_save = true;
                 if(need_save){  // 需要保存
-                    need_save = false;
                     // 送伺服器 //
                     thread = new Thread(Connection);
                     thread.start();
@@ -190,14 +190,12 @@ public class EditPersonalInfo extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 byte[] byte_array = byteArrayOutputStream.toByteArray();
                 encoded_img = Base64.encodeToString(byte_array, Base64.NO_WRAP);
-                edited_info += "_img";
-                edited_img = true;
+                edit_pic = 1;
+                need_save = true;
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 
@@ -218,6 +216,7 @@ public class EditPersonalInfo extends AppCompatActivity {
                 //建立連線
                 clientSocket = new Socket(host, server_port);
 
+                String edited_info = String.valueOf(edit_account) + String.valueOf(edit_email) + String.valueOf(edit_pic);
                 String name = uname.getText().toString();
                 String acc = account.getText().toString();
                 String mail = email.getText().toString();
@@ -247,11 +246,10 @@ public class EditPersonalInfo extends AppCompatActivity {
                     setting.Set_reg_account(account.getText().toString());
                     setting.Set_reg_email(email.getText().toString());
 
-                    /*Intent intent = new Intent();
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setClass(EditPersonalInfo.this, MainActivity.class);
-                    startActivity(intent);*/
+                    need_save = false;
+                    edit_account = 0;
+                    edit_email = 0;
+                    edit_pic = 0;
                     finish();
                 }
             }
