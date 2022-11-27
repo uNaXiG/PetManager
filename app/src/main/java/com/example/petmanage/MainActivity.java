@@ -2,12 +2,15 @@ package com.example.petmanage;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -25,23 +28,39 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Set;
 
-
 public class MainActivity extends AppCompatActivity {
 
+    private Thread thread;  // send edited profile info
+    private Thread thread2; // to get pet profile
+    String server_ip;   // 伺服器IP
+    int server_port;       // port number
+    private Socket clientSocket;    //客戶端的socket
+
+    PrintWriter out;
+    BufferedReader in;
     Settings setting;
+
     LinearLayout layout;
     String pets;
+    Bitmap pet_profile;
     ArrayList<Pet> pet_info;
     private final int GALLERY_REQ_CODE = 1000;
 
-    Thread thread;
-
     ImageView iv;
-    Button btn;
+    String sel_pet_id;
+    String img_base64;
 
     private DrawerLayout drawerLayout;//滑動選單
     private NavigationView navView;//導航檢視
@@ -49,10 +68,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         transparentStatusBar(); // 透明化狀態列
+
+        setting = (Settings) getApplicationContext();
+        server_ip = setting.Get_IP();
+        server_port = setting.Get_Port();
 
         // 一些滑動選單的設定值 //
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -67,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
 
         navView = findViewById(R.id.nav_view);
         View headerView = navView.getHeaderView(0);
-        setting = (Settings) getApplicationContext();
         layout = (LinearLayout) findViewById(R.id.layout);
 
         // 將多筆寵物的json字串各別取出 //
@@ -79,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             pet_set = new String[]{""};
             pet_set[0] = pets;
         }
+        pet_profile = BitmapFactory.decodeResource(getResources(), R.drawable.show_pet_pic);
 
         // json decode //
         Gson gson = new Gson();
@@ -88,9 +109,14 @@ public class MainActivity extends AppCompatActivity {
 
         setting.Set_Pet_info(pet_info);
 
+
         // 設定名稱
         TextView uname = (TextView) headerView.findViewById(R.id.user_name);
         uname.setText(setting.Get_reg_name());
+
+        // 設定頭像
+        ImageView profile = (ImageView) headerView.findViewById(R.id.profile);
+        profile.setImageBitmap(setting.get_profile());
 
         navView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -112,7 +138,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.item_diary:      // 日記
-
+                    Intent go_to_diary = new Intent();
+                    go_to_diary.setClass(MainActivity.this, PetDiary.class);   // 跳轉到編輯資料頁面
+                    startActivity(go_to_diary);
                     break;
 
                 case R.id.item_setting:   // 設定
@@ -126,6 +154,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.item_exit:      // 登出
+                    Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
+                    setting.set_profile(b);
                     finish();
                     break;
 
@@ -135,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
+
+
     }
 
     private void Set_Visual(String[] pet_set, Gson gson){
@@ -163,9 +195,8 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(450,550);
             params.setMargins(5,18,10,0);
             imgv.setLayoutParams(params);
-            imgv.setImageResource(R.drawable.show_pet_pic);
             imgv.setId(i);
-            int finalI = i;
+            imgv.setImageBitmap(pet_profile);       // 只差從server取得base64後存進 setting.pet_profile List中，然後根據索引i取出bitmap
             // 修改寵物圖片 //
             imgv.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -241,8 +272,58 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             iv.setImageURI(data.getData());
+            Pet pet = setting.Get_Pet_Info().get(setting.Get_Select_Pet());
+            sel_pet_id = pet.PetId;
+
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData() );
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                byte[] byte_array = byteArrayOutputStream.toByteArray();
+                img_base64 = Base64.encodeToString(byte_array, Base64.NO_WRAP);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            thread = new Thread(Connection);
+            thread.start();
         }
     }
+
+    private Runnable Connection = new Runnable(){
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            try{
+                //輸入 Server 端的 IP
+                InetAddress host = InetAddress.getByName(server_ip);
+                //建立連線
+                clientSocket = new Socket(host, server_port);
+
+                String message = "/edit_pet_img/" + sel_pet_id + "/" + img_base64;
+                // 向 server 發送訊息
+                out = new PrintWriter( new BufferedWriter( new OutputStreamWriter(clientSocket.getOutputStream())),true);
+
+                // 接收 server 發來的訊息
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+                out.println(message);
+                String response = "";   // 伺服器給予的回應字串，用於判定登入是否成功以及身分別
+                response = in.readLine();
+
+                if(response.equals("OK")){
+                    clientSocket.close();
+                }
+
+            }
+            catch(Exception e){
+                e.printStackTrace();
+                Log.e("text","Socket連線="+e.toString());
+                finish();    //當斷線時自動關閉 Socket
+            }
+        }
+    };
 
     private void transparentStatusBar() {
         //改變狀態列顏色為透明

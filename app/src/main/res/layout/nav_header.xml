@@ -9,7 +9,7 @@
 
     <!--頭像-->
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_avatar"
+        android:id="@+id/profile"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
@@ -24,14 +24,14 @@
     <!--名稱-->
     <TextView
         android:layout_marginTop="16dp"
-        android:layout_alignTop="@+id/iv_avatar"
+        android:layout_alignTop="@+id/profile"
         android:id="@+id/user_name"
         android:textSize="18dp"
         android:textColor="#777"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/iv_avatar"
+        android:layout_toEndOf="@+id/profile"
         android:text="廖宥翔" />
     <!--標籤-->
     <TextView
@@ -42,7 +42,7 @@
         android:textColor="#888"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/iv_avatar"
+        android:layout_toEndOf="@+id/profile"
         android:text="銀牌飼主 | Lv. 5" />
 
 </RelativeLayout>

@@ -1,5 +1,9 @@
 package com.example.petmanage;
 
+import android.graphics.Bitmap;
+
+import java.util.ArrayList;
+
 public class Pet {
     public String PetId;
     public String Owner;

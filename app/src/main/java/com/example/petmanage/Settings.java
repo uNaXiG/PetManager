@@ -3,6 +3,7 @@ package com.example.petmanage;
 import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.View;
 
@@ -23,6 +24,7 @@ public class Settings extends Application {
     private String pets;
     private String reg_date;
     private String UID;
+    public ArrayList<Bitmap> pet_profile;
 
     private boolean add_pet_first = true;
     private boolean isAdd = false;
@@ -32,6 +34,11 @@ public class Settings extends Application {
 
     public void Set_Add(boolean bool){this.isAdd = bool;}
     public boolean Get_Add(){return this.isAdd; }
+
+    private Bitmap profile;
+    public void set_profile(Bitmap b){ this.profile = b; }
+    public Bitmap get_profile() { return  this.profile; }
+
 
     private int pet_id;
     private ArrayList<Pet> pet_info;

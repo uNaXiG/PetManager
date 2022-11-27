@@ -85,6 +85,7 @@ public class EditPersonalInfo extends AppCompatActivity {
                 startActivityForResult(intent, GALLERY_REQ_CODE);
             }
         });
+        pic.setImageBitmap(setting.get_profile());
 
         // 登入天數 //
         TextView login_days = (TextView) findViewById(R.id.login_days);
@@ -192,6 +193,7 @@ public class EditPersonalInfo extends AppCompatActivity {
                 encoded_img = Base64.encodeToString(byte_array, Base64.NO_WRAP);
                 edit_pic = 1;
                 need_save = true;
+                setting.set_profile(bitmap);
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -237,6 +239,7 @@ public class EditPersonalInfo extends AppCompatActivity {
                 if(response.contains("reject")){
                     // 否決
                     msg_reject.notify(1, notify_reject); // 通知
+                    clientSocket.close();
                 }
                 else if(response.contains("seccuss")){
                     // 通過
@@ -250,6 +253,7 @@ public class EditPersonalInfo extends AppCompatActivity {
                     edit_account = 0;
                     edit_email = 0;
                     edit_pic = 0;
+                    clientSocket.close();
                     finish();
                 }
             }

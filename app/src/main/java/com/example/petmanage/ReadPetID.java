@@ -280,7 +280,6 @@ public class ReadPetID extends AppCompatActivity {
                 out.println(message);
                 String response = in.readLine();    // server回覆是否允許加入
 
-
                 // 讓新用戶加入一個新寵物ID //
                 if(response.contains("seccuss") && settings.Get_First()){
                     settings.Set_Add(true);
