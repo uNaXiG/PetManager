@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Settings extends Application {
 
-    private String server_ip = "192.168.1.103";   // 伺服器IP
+    private String server_ip = "192.168.1.106";   // 伺服器IP
     private int port = 8080;     // 伺服器port
 
     private String reg_name;

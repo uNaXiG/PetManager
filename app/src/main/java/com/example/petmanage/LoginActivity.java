@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                 in_pwd = pwd.getText().toString();
                 if(in_name.length() < 8 || in_pwd.length() < 8){
                     Toast.makeText(LoginActivity.this, "Account(or password) length should be at least 8 character !", Toast.LENGTH_SHORT).show();
-                    pr.setText("login error123123123");
+                    pr.setText("login error");
                     return;
                 }
                 if(!Character.isLetter(in_name.charAt(0))){
