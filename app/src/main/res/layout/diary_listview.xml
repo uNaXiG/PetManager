@@ -2,55 +2,68 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#00000000"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/background"
         android:layout_width="412dp"
-        android:layout_height="116dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.198"
-        android:background="@drawable/border"
-        app:srcCompat="@android:drawable/screen_background_light" />
+        android:background="#33ffffff" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/diary_image"
-        android:layout_width="83dp"
-        android:layout_height="86dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.189"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:padding="1dp"
+        app:shapeAppearanceOverlay="@style/circleImageStyle"
+        app:strokeColor="#999"
+        app:strokeWidth="2dp"
+        tools:srcCompat="@drawable/icon" />
 
     <TextView
         android:id="@+id/date"
-        android:layout_width="80dp"
-        android:layout_height="34dp"
-        android:text="日期"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_width="265dp"
+        android:layout_height="30dp"
+        android:text="【yyyy-MM-dd】Title"
+        android:textStyle="bold"
+        android:layout_marginRight="100dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="18dp"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.175" />
+        app:layout_constraintTop_toTopOf="@id/background"
+        app:layout_constraintVertical_bias="0.199" />
 
     <TextView
         android:id="@+id/diary_content"
-        android:layout_width="233dp"
+        android:layout_width="265dp"
         android:layout_height="116dp"
         android:text="日記內容...."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/background"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/date"
         app:layout_constraintVertical_bias="0.199" />
 </androidx.constraintlayout.widget.ConstraintLayout>

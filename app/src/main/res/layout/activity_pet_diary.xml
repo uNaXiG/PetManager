@@ -26,16 +26,24 @@
             app:strokeColor="#999"
             app:strokeWidth="2dp"  />
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_img_layout"
+        android:id="@+id/pet_name"
+        android:textSize="18dp"
+        android:text=""
+        android:layout_marginLeft="10dp"/>
 
     <ListView
         android:id="@+id/diary_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/show_img_layout"
+        android:layout_below="@+id/pet_name"
 
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="-1dp" />
+        android:layout_marginTop="5dp" />
 
     <Button
         android:id="@+id/add_diary_button"
