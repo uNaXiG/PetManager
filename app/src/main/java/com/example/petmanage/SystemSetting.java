@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 
+import org.w3c.dom.Text;
+
 public class SystemSetting extends AppCompatActivity {
 
     TextView weblink;
@@ -26,6 +28,15 @@ public class SystemSetting extends AppCompatActivity {
         setContentView(R.layout.activity_system_setting);
 
         transparentStatusBar();
+
+        // 返回 //
+        TextView back = (TextView)findViewById(R.id.back) ;
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         // 外部連結 //
         weblink = (TextView) findViewById(R.id.gov_link);
@@ -83,6 +94,7 @@ public class SystemSetting extends AppCompatActivity {
                 Toast.makeText(SystemSetting.this, "DELETE", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     private void transparentStatusBar() {

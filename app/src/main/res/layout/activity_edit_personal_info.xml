@@ -417,5 +417,19 @@
             android:layout_centerHorizontal="true"
             tools:ignore="MissingConstraints"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/back_btn"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:padding="10dp"
+            android:text="back"
+            android:textStyle="bold"
+            android:backgroundTint="#80ffffff"
+            android:textColor="#FFEAD070"
+            android:layout_centerHorizontal="true"
+            tools:ignore="MissingConstraints"/>
+
     </LinearLayout>
 </RelativeLayout>

@@ -25,7 +25,19 @@ import android.widget.Toast;
 
 import com.google.android.material.imageview.ShapeableImageView;
 
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+
 public class PetDiary extends AppCompatActivity {
+
+    String server_ip;   // 伺服器IP
+    int server_port;       // port number
+    private Socket clientSocket;    //客戶端的socket
+
+    PrintWriter out;
+    BufferedReader in;
+    Settings setting;
 
     ListView diaryListView;
     Button addDiaryButton;
@@ -45,8 +57,12 @@ public class PetDiary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_diary);
 
+        setting = (Settings) getApplicationContext();
+        server_ip = setting.Get_IP();
+        server_port = setting.Get_Port();
 
-
+        pet_name = (TextView) findViewById(R.id.pet_name);
+        pet_name.setText("【" + setting.Get_Pet_Info().get(0).PetId + "】" + setting.Get_Pet_Info().get(0).Name + " 的日記本");
 
         diaryListView = (ListView) findViewById(R.id.diary_list);
         addDiaryButton = (Button) findViewById(R.id.add_diary_button);
@@ -58,6 +74,14 @@ public class PetDiary extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String title_str = title[(int) id];
                 Toast.makeText(PetDiary.this, title_str, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        TextView back = (TextView) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

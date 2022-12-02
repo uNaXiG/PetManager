@@ -147,6 +147,15 @@ public class EditPersonalInfo extends AppCompatActivity {
             }
         });
 
+        // 返回 //
+        MaterialButton back = (MaterialButton) findViewById(R.id.back_btn);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         //建立通知
         msg_accept = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
