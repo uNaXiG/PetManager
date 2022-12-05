@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
 
         setting.Set_Pet_info(pet_info);
 
+        thread2 =  new Thread(RequestToGetDiary);
+        thread2.start();
 
         // 設定名稱
         TextView uname = (TextView) headerView.findViewById(R.id.user_name);
@@ -161,12 +163,12 @@ public class MainActivity extends AppCompatActivity {
 
                 default: break;
             }
+
+
             //關閉滑動選單
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
-
-
     }
 
     private void Set_Visual(String[] pet_set, Gson gson){
@@ -290,6 +292,32 @@ public class MainActivity extends AppCompatActivity {
             thread.start();
         }
     }
+
+    private Runnable RequestToGetDiary = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                InetAddress host = InetAddress.getByName(server_ip);
+                //建立連線
+                clientSocket = new Socket(host, server_port);
+
+                // 向 server 發送訊息
+                out = new PrintWriter(new BufferedWriter( new OutputStreamWriter(clientSocket.getOutputStream())),true);
+                // 接收 server 發來的訊息
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+                out.println("/get_diary/" + setting.Get_Pet_Info().get(0).PetId);
+                String response = "";
+                response = in.readLine();
+                if(response.split("/")[1].equals("get_diary_response")){
+                    Pet.diary_title = response.split("/")[2].split(",");
+                    Pet.diary_content = response.split("/")[3].split(",");
+                    Pet.diary_profile = response.split("/", 5)[4].split(",");
+                }
+            }
+            catch (Exception e){}
+        }
+    };
 
     private Runnable Connection = new Runnable(){
         @Override

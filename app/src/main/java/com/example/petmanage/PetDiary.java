@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 
@@ -19,13 +21,16 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -42,66 +47,35 @@ public class PetDiary extends AppCompatActivity {
     int server_port;       // port number
     private Socket clientSocket;    //客戶端的socket
     private Thread thread;
-    int lock = 0;
 
-    PrintWriter out;
-    BufferedReader in;
     Settings setting;
 
-    ListView diaryListView;
     Button addDiaryButton;
 
     ShapeableImageView pet_icon;
     TextView pet_name;
 
-    String[] title;
-    String[] contant;
-    int image[] = {R.drawable.giwawa, R.drawable.giwawa};
+    LinearLayout layout;
+    String[] title, content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_diary);
+        transparentStatusBar();
 
         setting = (Settings) getApplicationContext();
         server_ip = setting.Get_IP();
         server_port = setting.Get_Port();
 
+        title = Pet.diary_title.clone();
+        content = Pet.diary_content.clone();
+
         pet_name = (TextView) findViewById(R.id.pet_name);
-        pet_name.setText("【" + setting.Get_Pet_Info().get(0).PetId + "】" + setting.Get_Pet_Info().get(0).Name + " 的日記本");
-
-        // 讀取伺服器資料 //
-        thread = new Thread(Connection);
-        thread.start();
-        while (lock == 0) continue;
-
-        //pet_name.setText("unlock");
-
-        /*MyAdapter myAdapter = new MyAdapter(this, title, contant, image);
-        diaryListView.setAdapter(myAdapter);
-        diaryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String title_str = title[(int) id];
-                Toast.makeText(PetDiary.this, title_str, Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
-        diaryListView = (ListView) findViewById(R.id.diary_list);
         addDiaryButton = (Button) findViewById(R.id.add_diary_btn);
+        layout = (LinearLayout) findViewById(R.id.layout);
 
-
-        addDiaryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent write_diary = new Intent();
-                write_diary.setClass(PetDiary.this, WriteDiary.class);
-                startActivity(write_diary);
-            }
-        });
-
-
-
+        pet_name.setText(setting.Get_Pet_Info().get(0).PetId + " -- " + setting.Get_Pet_Info().get(0).Name + " 的日記本");
 
         TextView back = (TextView) findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -110,83 +84,61 @@ public class PetDiary extends AppCompatActivity {
                 finish();
             }
         });
-
-        transparentStatusBar();
+        addDiaryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent write_diary = new Intent();
+                write_diary.setClass(PetDiary.this, WriteDiary.class);
+                startActivity(write_diary);
+            }
+        });
+        Set_Visual();
     }
 
-    private Runnable Connection = new Runnable(){
-        @Override
-        public void run() {
-            // TODO Auto-generated method stub
-            try{
-                //輸入 Server 端的 IP
-                InetAddress host = InetAddress.getByName(server_ip);
-                //建立連線
-                clientSocket = new Socket(host, server_port);
+    private void Set_Visual(){
+        for(int i = 0; i < title.length; i++){
 
-                String message  ="/get_diary/" + setting.Get_Pet_Info().get(0).PetId;
-                // 向 server 發送訊息
-                out = new PrintWriter( new BufferedWriter( new OutputStreamWriter(clientSocket.getOutputStream())),true);
+            LinearLayout.LayoutParams layout_params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layout_params.setMargins(50,70,50,10);
 
-                // 接收 server 發來的訊息
-                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-                out.println(message);
-                String response = "";   // 伺服器給予的回應字串，用於判定登入是否成功以及身分別
-                response = in.readLine();
-
-                if(response.split("/")[1].equals("get_diary_response")){
-                    title = response.split("/")[2].split(",").clone();
-                    contant = response.split("/")[3].split(",").clone();
-                    lock = 2;
-                    clientSocket.close();
+            LinearLayout first_layout = new LinearLayout(this);
+            first_layout.setOrientation(LinearLayout.VERTICAL);
+            first_layout.setBackgroundColor(0x80ffffff);
+            first_layout.setLayoutParams(layout_params);
+            first_layout.setId(i);
+            int finalI = i;
+            first_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(PetDiary.this, String.valueOf(finalI), Toast.LENGTH_SHORT).show();
                 }
-                else if(response.split("/")[1].equals("empty_diary")){
+            });
 
-                }
+            layout.addView(first_layout);
+            // 標題
+            TextView tx = new TextView(this);
+            tx.setTextColor(0xffff8a00);
+            LinearLayout.LayoutParams tx_params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            tx_params.setMargins(10,10,0,18);
+            tx.setLayoutParams(tx_params);
+            tx.setTextSize(16);
+            tx.setText(title[i]);
+            first_layout.addView(tx);
 
-            }
-            catch(Exception e){
-                e.printStackTrace();
-                Log.e("text","Socket連線="+e.toString());
-                finish();    //當斷線時自動關閉 Socket
-            }
-        }
-    };
-
-    class MyAdapter extends ArrayAdapter<String>{
-
-        Context context;
-        String rTitle[];
-        String rsec[];
-        int rimage[];
-
-        MyAdapter (Context context,String title[],String sec[],int image[]){
-            super(context,R.layout.diary_listview,R.id.date,title);
-            this.context = context;
-            this.rTitle = title;
-            this.rsec = sec;
-            this.rimage = image;
-        }
-
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            LayoutInflater layoutInflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View row = layoutInflater.inflate(R.layout.diary_listview,parent,false);
-            ImageView images = row.findViewById(R.id.diary_image);
-            TextView textView = row.findViewById(R.id.date);
-            TextView textView1 = row.findViewById(R.id.diary_content);
-
-            images.setImageResource(rimage[position]);
-            textView.setText(rTitle[position]);
-            textView1.setText(rsec[position]);
-
-            return row;
+            // 內容
+            TextView tx1 = new TextView(this);
+            tx1.setTextColor(0xffff8a00);
+            LinearLayout.LayoutParams tx1_params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            tx1_params.setMargins(20,10,0,18);
+            tx1.setLayoutParams(tx1_params);
+            tx1.setTextSize(16);
+            tx1.setText(content[i]);
+            first_layout.addView(tx1);
         }
     }
-
 
     private void transparentStatusBar() {
         //改變狀態列顏色為透明

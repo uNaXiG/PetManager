@@ -171,8 +171,20 @@ public class WriteDiary extends AppCompatActivity {
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date(System.currentTimeMillis());
                     out.println("/diary_pic/"+ setting.Get_Pet_Info().get(0).PetId + "/" + formatter.format(date) + "/" + encoded_img);
-                }
 
+                    out.println("/get_diary/" + setting.Get_Pet_Info().get(0).PetId);
+                    response = in.readLine();
+                    if(response.split("/")[1].equals("get_diary_response")){
+                        Pet.diary_title = response.split("/")[2].split(",");
+                        Pet.diary_content = response.split("/")[3].split(",");
+                        Pet.diary_profile = response.split("/", 5)[4].split(",");
+                    }
+                    Intent back = new Intent();
+                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    back.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    back.setClass(WriteDiary.this, PetDiary.class);
+                    startActivity(back);
+                }
 
             }
             catch(Exception e){

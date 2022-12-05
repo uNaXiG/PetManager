@@ -13,6 +13,12 @@ public class Pet {
     public String Birthday;
     public String Date;
 
+    public static String[] diary_title;
+    public static String[] diary_content;
+    public static String[] diary_profile;
+
+    public Pet(){ }
+
     public Pet(String PetId, String Owner, String Name, String Specie, String Gender, String Birthday, String Date){
         this.PetId = PetId;
         this.Owner = Owner;
