@@ -17,6 +17,7 @@ public class Pet {
     public static String[] diary_content;
     public static String[] diary_profile;
 
+    public static int Select_Diary;
     public Pet(){ }
 
     public Pet(String PetId, String Owner, String Name, String Specie, String Gender, String Birthday, String Date){
@@ -28,4 +29,5 @@ public class Pet {
         this.Birthday = Birthday;
         this.Date = Date;
     }
+
 }

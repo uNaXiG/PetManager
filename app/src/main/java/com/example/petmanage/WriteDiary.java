@@ -149,7 +149,7 @@ public class WriteDiary extends AppCompatActivity {
                             .put("PetId", setting.Get_Pet_Info().get(0).PetId)
                             .put("Date", cur_date.getText())
                             .put("Title", title_in.getText())
-                            .put("Content", content_in.getText())
+                            .put("Content", content_in.getText().toString().replaceAll("\n","*"))
                             .toString();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -175,9 +175,9 @@ public class WriteDiary extends AppCompatActivity {
                     out.println("/get_diary/" + setting.Get_Pet_Info().get(0).PetId);
                     response = in.readLine();
                     if(response.split("/")[1].equals("get_diary_response")){
-                        Pet.diary_title = response.split("/")[2].split(",");
-                        Pet.diary_content = response.split("/")[3].split(",");
-                        Pet.diary_profile = response.split("/", 5)[4].split(",");
+                        Pet.diary_title = response.split("/")[2].split("_");
+                        Pet.diary_content = response.split("/")[3].split("_");
+                        //Pet.diary_profile = response.split("/", 5)[4].split(",");
                     }
                     Intent back = new Intent();
                     back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

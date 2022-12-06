@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -111,19 +112,24 @@ public class PetDiary extends AppCompatActivity {
             first_layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(PetDiary.this, String.valueOf(finalI), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(PetDiary.this, String.valueOf(finalI), Toast.LENGTH_SHORT).show();
+                    Pet.Select_Diary = finalI;
+                    Intent intent = new Intent();
+                    intent.setClass(PetDiary.this, EditDiary.class);
+                    startActivity(intent);
                 }
             });
 
             layout.addView(first_layout);
+
             // 標題
             TextView tx = new TextView(this);
             tx.setTextColor(0xffff8a00);
             LinearLayout.LayoutParams tx_params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            tx_params.setMargins(10,10,0,18);
+            tx_params.setMargins(10,30,10,30);
             tx.setLayoutParams(tx_params);
-            tx.setTextSize(16);
+            tx.setTextSize(22);
             tx.setText(title[i]);
             first_layout.addView(tx);
 
@@ -132,11 +138,20 @@ public class PetDiary extends AppCompatActivity {
             tx1.setTextColor(0xffff8a00);
             LinearLayout.LayoutParams tx1_params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            tx1_params.setMargins(20,10,0,18);
+            tx1_params.setMargins(20,10,10,10);
             tx1.setLayoutParams(tx1_params);
-            tx1.setTextSize(16);
-            tx1.setText(content[i]);
+            tx1.setTextSize(18);
+            char[] char_of_content = content[i].toCharArray();
+            String part_of_content = "";
+
+            for(int j = 0; j < char_of_content.length; j++){
+                if(String.valueOf(char_of_content[j]).equals("*") || j >= 20) break;
+                part_of_content += String.valueOf(char_of_content[j]);
+            }
+
+            tx1.setText(part_of_content + "...more");
             first_layout.addView(tx1);
+
         }
     }
 
