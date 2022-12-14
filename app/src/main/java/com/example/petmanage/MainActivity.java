@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
                 if(response.split("/")[1].equals("get_diary_response")){
                     Pet.diary_title = response.split("/")[2].split("_");
                     Pet.diary_content = response.split("/")[3].split("_");
-                    //Pet.diary_profile = response.split("/", 5)[4].split(",");
+                    Pet.diary_profile = response.split("/", 5)[4].split(",");
                 }
             }
             catch (Exception e){}

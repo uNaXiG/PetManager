@@ -149,7 +149,7 @@ public class WriteDiary extends AppCompatActivity {
                             .put("PetId", setting.Get_Pet_Info().get(0).PetId)
                             .put("Date", cur_date.getText())
                             .put("Title", title_in.getText())
-                            .put("Content", content_in.getText().toString().replaceAll("\n","*"))
+                            .put("Content", content_in.getText().toString().replaceAll("\n","***"))
                             .toString();
                 } catch (JSONException e) {
                     e.printStackTrace();

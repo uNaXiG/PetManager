@@ -69,31 +69,46 @@ public class PetDiary extends AppCompatActivity {
         server_ip = setting.Get_IP();
         server_port = setting.Get_Port();
 
-        title = Pet.diary_title.clone();
-        content = Pet.diary_content.clone();
-
         pet_name = (TextView) findViewById(R.id.pet_name);
+
         addDiaryButton = (Button) findViewById(R.id.add_diary_btn);
-        layout = (LinearLayout) findViewById(R.id.layout);
-
-        pet_name.setText(setting.Get_Pet_Info().get(0).PetId + " -- " + setting.Get_Pet_Info().get(0).Name + " 的日記本");
-
         TextView back = (TextView) findViewById(R.id.back);
+
+        try {
+            title = Pet.diary_title.clone();
+
+            content = Pet.diary_content.clone();
+
+            layout = (LinearLayout) findViewById(R.id.layout);
+
+            pet_name.setText(setting.Get_Pet_Info().get(0).PetId + " -- " + setting.Get_Pet_Info().get(0).Name + " 的日記本");
+
+            Set_Visual();
+        }
+        catch (Exception ex){
+
+            pet_name.setText("目前這邊沒有任何日記喔~ 點擊下方按鈕新增");
+
+        }
         back.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 finish();
             }
+
         });
         addDiaryButton.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
                 Intent write_diary = new Intent();
                 write_diary.setClass(PetDiary.this, WriteDiary.class);
                 startActivity(write_diary);
             }
+
         });
-        Set_Visual();
+
     }
 
     private void Set_Visual(){
