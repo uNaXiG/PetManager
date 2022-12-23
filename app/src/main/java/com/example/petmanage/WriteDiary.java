@@ -155,7 +155,7 @@ public class WriteDiary extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                String message  = "/new_diary/" + res;
+                String message  = "/new_diary/" + res + "***";
                 // 向 server 發送訊息
                 out = new PrintWriter( new BufferedWriter( new OutputStreamWriter(clientSocket.getOutputStream())),true);
 
