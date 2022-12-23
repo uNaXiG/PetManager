@@ -127,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
                     Intent go_to_personal = new Intent();
                     go_to_personal.setClass(MainActivity.this, EditPersonalInfo.class);   // 跳轉到編輯資料頁面
                     startActivity(go_to_personal);
+                    //關閉滑動選單
+                    drawerLayout.closeDrawer(GravityCompat.START);
                     break;
 
                 case R.id.item_add:    // 新增寵物頁面
@@ -134,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
                     Intent go_to_add_pet = new Intent();
                     go_to_add_pet.setClass(MainActivity.this, ReadPetID.class);   // 跳轉到編輯資料頁面
                     startActivity(go_to_add_pet);
+                    //關閉滑動選單
+                    drawerLayout.closeDrawer(GravityCompat.START);
                     break;
 
                 case R.id.item_analyze:   // 情緒
@@ -162,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             setting.Set_Select_Pet(x[0]);
+                            Toast.makeText(MainActivity.this, "選擇了" + x[0], Toast.LENGTH_SHORT).show();
                             thread2 =  new Thread(RequestToGetDiary);
                             thread2.start();
 
@@ -174,6 +179,8 @@ public class MainActivity extends AppCompatActivity {
                     Intent go_to_setting = new Intent();
                     go_to_setting.setClass(MainActivity.this, SystemSetting.class);   // 跳轉到編輯資料頁面
                     startActivity(go_to_setting);
+                    //關閉滑動選單
+                    drawerLayout.closeDrawer(GravityCompat.START);
                     break;
 
                 case R.id.item_contact:   // 寫信
@@ -183,6 +190,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.item_exit:      // 登出
                     Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
                     setting.set_profile(b);
+                    //關閉滑動選單
+                    drawerLayout.closeDrawer(GravityCompat.START);
                     finish();
                     break;
 
@@ -190,8 +199,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            //關閉滑動選單
-            drawerLayout.closeDrawer(GravityCompat.START);
+
             return true;
         });
     }
@@ -341,6 +349,8 @@ public class MainActivity extends AppCompatActivity {
                     Intent go_to_diary = new Intent();
                     go_to_diary.setClass(MainActivity.this, PetDiary.class);   // 跳轉到編輯資料頁面
                     startActivity(go_to_diary);
+                    //關閉滑動選單
+                    drawerLayout.closeDrawer(GravityCompat.START);
                 }
                 else if(response.split("/")[1].equals("empty_diary")){
                     Intent go_to_diary = new Intent();

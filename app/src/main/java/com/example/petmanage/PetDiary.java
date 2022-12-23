@@ -94,6 +94,10 @@ public class PetDiary extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                // clear pet array //
+                Pet.diary_title = new String[0];
+                Pet.diary_content = new String[0];
+                Pet.diary_profile = new String[0];
                 finish();
             }
 
@@ -164,7 +168,7 @@ public class PetDiary extends AppCompatActivity {
                 part_of_content += String.valueOf(char_of_content[j]);
             }
 
-            tx1.setText(part_of_content + "...more");
+            tx1.setText(part_of_content + "......");
             first_layout.addView(tx1);
 
         }

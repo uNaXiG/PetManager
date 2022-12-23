@@ -149,13 +149,13 @@ public class WriteDiary extends AppCompatActivity {
                             .put("PetId", setting.Get_Pet_Info().get(setting.Get_Select_Pet()).PetId)
                             .put("Date", cur_date.getText())
                             .put("Title", title_in.getText())
-                            .put("Content", content_in.getText().toString().replaceAll("\n","***"))
+                            .put("Content", content_in.getText().toString().replaceAll("\n","***") + "***")
                             .toString();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                String message  = "/new_diary/" + res + "***";
+                String message  = "/new_diary/" + res;
                 // 向 server 發送訊息
                 out = new PrintWriter( new BufferedWriter( new OutputStreamWriter(clientSocket.getOutputStream())),true);
 
@@ -177,7 +177,7 @@ public class WriteDiary extends AppCompatActivity {
                     if(response.split("/")[1].equals("get_diary_response")){
                         Pet.diary_title = response.split("/")[2].split("_");
                         Pet.diary_content = response.split("/")[3].split("_");
-                        //Pet.diary_profile = response.split("/", 5)[4].split(",");
+                        Pet.diary_profile = response.split("/", 5)[4].split(",");
                     }
                     Intent back = new Intent();
                     back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
