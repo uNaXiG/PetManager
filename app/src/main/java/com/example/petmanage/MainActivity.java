@@ -141,7 +141,11 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.item_healthy:
-
+                    Intent go_to_healthy = new Intent();
+                    go_to_healthy.setClass(MainActivity.this, Healthy.class);   // 跳轉到健康頁面
+                    startActivity(go_to_healthy);
+                    //關閉滑動選單
+                    drawerLayout.closeDrawer(GravityCompat.START);
                     break;
 
                 case R.id.item_analyze:   // 情緒
