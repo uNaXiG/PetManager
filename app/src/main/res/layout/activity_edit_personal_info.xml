@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/iv_avatar"
-            android:text="銀牌飼主 | Lv. 5" />
+            android:text="銅牌飼主 | Lv. 1" />
 
     </LinearLayout>
 

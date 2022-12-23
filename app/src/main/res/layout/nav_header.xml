@@ -43,6 +43,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/profile"
-        android:text="銀牌飼主 | Lv. 5" />
+        android:text="銅牌飼主 | Lv. 1" />
 
 </RelativeLayout>

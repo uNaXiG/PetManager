@@ -89,7 +89,7 @@ public class EditPersonalInfo extends AppCompatActivity {
 
         // 登入天數 //
         TextView login_days = (TextView) findViewById(R.id.login_days);
-        login_days.setText("開發中"); // 開發中
+        login_days.setText("1 Day"); // 開發中
 
         // 登記數量 //
         TextView pets_count = (TextView) findViewById(R.id.pets_count);

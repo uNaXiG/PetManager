@@ -140,6 +140,10 @@ public class MainActivity extends AppCompatActivity {
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
 
+                case R.id.item_healthy:
+
+                    break;
+
                 case R.id.item_analyze:   // 情緒
 
                     break;
