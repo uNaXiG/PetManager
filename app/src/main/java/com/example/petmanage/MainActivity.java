@@ -1,5 +1,6 @@
 package com.example.petmanage;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -109,8 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
         setting.Set_Pet_info(pet_info);
 
-        thread2 =  new Thread(RequestToGetDiary);
-        thread2.start();
+
 
         // 設定名稱
         TextView uname = (TextView) headerView.findViewById(R.id.user_name);
@@ -140,9 +141,33 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.item_diary:      // 日記
-                    Intent go_to_diary = new Intent();
-                    go_to_diary.setClass(MainActivity.this, PetDiary.class);   // 跳轉到編輯資料頁面
-                    startActivity(go_to_diary);
+
+                    // 初始化寵物名單陣列 //
+                    String pets[] = new String[setting.Get_Pet_Info().size()];
+                    for(int i = 0; i < setting.Get_Pet_Info().size(); i++) pets[i]=setting.Get_Pet_Info().get(i).Name;
+
+                    final int[] x = {0};
+                    AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                    builder.setTitle("您要看哪隻寵物的日記呢？"); //設置它的標題
+                    builder.setSingleChoiceItems(pets,0,new DialogInterface.OnClickListener() {
+                        //把它設置為單選的型態
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            x[0] = i;
+                            //Toast.makeText(MainActivity.this, "選擇了" + pets[i], Toast.LENGTH_SHORT).show();
+                            //提醒使用者點選了選項
+                        }
+                    });
+                    builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            setting.Set_Select_Pet(x[0]);
+                            thread2 =  new Thread(RequestToGetDiary);
+                            thread2.start();
+
+                        }
+                    });
+                    builder.create().show(); //也是一樣記得創建他並顯示
                     break;
 
                 case R.id.item_setting:   // 設定
@@ -306,13 +331,21 @@ public class MainActivity extends AppCompatActivity {
                 // 接收 server 發來的訊息
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-                out.println("/get_diary/" + setting.Get_Pet_Info().get(0).PetId);
+                out.println("/get_diary/" + setting.Get_Pet_Info().get(setting.Get_Select_Pet()).PetId);
                 String response = "";
                 response = in.readLine();
                 if(response.split("/")[1].equals("get_diary_response")){
                     Pet.diary_title = response.split("/")[2].split("_");
                     Pet.diary_content = response.split("/")[3].split("_");
                     Pet.diary_profile = response.split("/", 5)[4].split(",");
+                    Intent go_to_diary = new Intent();
+                    go_to_diary.setClass(MainActivity.this, PetDiary.class);   // 跳轉到編輯資料頁面
+                    startActivity(go_to_diary);
+                }
+                else if(response.split("/")[1].equals("empty_diary")){
+                    Intent go_to_diary = new Intent();
+                    go_to_diary.setClass(MainActivity.this, PetDiary.class);   // 跳轉到編輯資料頁面
+                    startActivity(go_to_diary);
                 }
             }
             catch (Exception e){}

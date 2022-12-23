@@ -81,7 +81,7 @@ public class PetDiary extends AppCompatActivity {
 
             layout = (LinearLayout) findViewById(R.id.layout);
 
-            pet_name.setText(setting.Get_Pet_Info().get(0).PetId + " -- " + setting.Get_Pet_Info().get(0).Name + " 的日記本");
+            pet_name.setText(setting.Get_Pet_Info().get(setting.Get_Select_Pet()).PetId + " -- " + setting.Get_Pet_Info().get(setting.Get_Select_Pet()).Name + " 的日記本");
 
             Set_Visual();
         }

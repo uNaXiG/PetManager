@@ -169,18 +169,6 @@ public class LoginActivity extends AppCompatActivity {
                         settings.Set_reg_phone(response.split("/")[9]);
                         settings.Set_reg_date(response.split("/")[10]);
                         settings.Set_Uid(response.split("/")[11]);
-                        String user_base64 = response.split("/",14)[13];
-                        if(!user_base64.equals("")){
-                            // 曾經修改過自己的頭像
-                            byte[] decodedString = Base64.decode(user_base64, Base64.DEFAULT);
-                            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                            settings.set_profile(decodedByte);
-                        }
-                        else{
-                            // 預設頭像
-                            Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
-                            settings.set_profile(icon);
-                        }
 
                         if(response.split("/")[2].equals("empty_user") ){
                             // 判定尚未加入寵物資料
@@ -190,6 +178,20 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else if( response.split("/")[2].equals("normal") ){
                             // 已加入過寵物紀錄
+
+                            String user_base64 = response.split("/",14)[13];
+                            if(!user_base64.equals("")){
+                                // 曾經修改過自己的頭像
+                                byte[] decodedString = Base64.decode(user_base64, Base64.DEFAULT);
+                                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                                settings.set_profile(decodedByte);
+                            }
+                            else{
+                                // 預設頭像
+                                Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
+                                settings.set_profile(icon);
+                            }
+
                             settings.Set_pets(response.split("/")[12]);
                             Intent intent = new Intent();
                             intent.setClass(LoginActivity.this, MainActivity.class);     // 跳轉到應用程式主介面

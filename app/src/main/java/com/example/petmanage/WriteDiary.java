@@ -146,7 +146,7 @@ public class WriteDiary extends AppCompatActivity {
                 String res = "";
                 try {
                     res = new JSONObject()
-                            .put("PetId", setting.Get_Pet_Info().get(0).PetId)
+                            .put("PetId", setting.Get_Pet_Info().get(setting.Get_Select_Pet()).PetId)
                             .put("Date", cur_date.getText())
                             .put("Title", title_in.getText())
                             .put("Content", content_in.getText().toString().replaceAll("\n","***"))
@@ -170,9 +170,9 @@ public class WriteDiary extends AppCompatActivity {
 
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date(System.currentTimeMillis());
-                    out.println("/diary_pic/"+ setting.Get_Pet_Info().get(0).PetId + "/" + formatter.format(date) + "/" + encoded_img);
+                    out.println("/diary_pic/"+ setting.Get_Pet_Info().get(setting.Get_Select_Pet()).PetId + "/" + formatter.format(date) + "/" + encoded_img);
 
-                    out.println("/get_diary/" + setting.Get_Pet_Info().get(0).PetId);
+                    out.println("/get_diary/" + setting.Get_Pet_Info().get(setting.Get_Select_Pet()).PetId);
                     response = in.readLine();
                     if(response.split("/")[1].equals("get_diary_response")){
                         Pet.diary_title = response.split("/")[2].split("_");

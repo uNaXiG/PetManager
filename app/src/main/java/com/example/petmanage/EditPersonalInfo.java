@@ -167,7 +167,7 @@ public class EditPersonalInfo extends AppCompatActivity {
         notify_accept = new NotificationCompat.Builder(this,"web")
                 .setContentTitle("修改成功")
                 .setContentText("若有修改帳號，下次請用新帳號登入！")
-                .setSmallIcon(R.mipmap.app_icon)
+                //.setSmallIcon(R.mipmap.app_icon)
                 .setLargeIcon(edit_success)
                 .build();
 
