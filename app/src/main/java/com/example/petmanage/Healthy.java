@@ -242,6 +242,7 @@ public class Healthy extends AppCompatActivity {
                 out.println(message);
                 String response = in.readLine();
 
+                // test
 
                 if(response.split("/")[1].equals("health_result")){
                     //show_res.setVisibility(View.VISIBLE);
