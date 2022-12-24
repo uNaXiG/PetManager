@@ -43,6 +43,8 @@ public class Settings extends Application {
     private int pet_id;
     private ArrayList<Pet> pet_info;
 
+
+
     public String Get_IP(){
         return this.server_ip;
     }

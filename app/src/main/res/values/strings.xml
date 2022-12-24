@@ -1,20 +1,25 @@
 <resources>
     <string name="app_name">PetManage</string>
     <string name="forget_pwd"><u>Forget Password ?</u></string>
+    <!--寵物選項-->
     <string-array name="petspecies_array">
         <item>Select Pet Species</item>
         <item>Dog</item>
         <item>Cat</item>
-        <item>Bird</item>
-        <item>Rabbit</item>
-        <item>Rat</item>
         <item>Monkey</item>
         <item>Bear</item>
         <item>Pig</item>
-        <item>Turtle</item>
-        <item>Snake</item>
-        <item>Others</item>
     </string-array>
+
+    <!--健康選項 活力-->
+    <string-array name="health_energy">
+        <item>非常過動</item>
+        <item>精神不錯</item>
+        <item>偶爾發睏</item>
+        <item>昏昏欲睡</item>
+        <item>精神糟糕</item>
+    </string-array>
+
     <!-- 圓形圖片 -->
     <style name="circleImageStyle">
         <item name="cornerFamily">rounded</item>

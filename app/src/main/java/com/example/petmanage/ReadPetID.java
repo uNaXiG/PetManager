@@ -96,8 +96,6 @@ public class ReadPetID extends AppCompatActivity {
         spinner.setOnItemSelectedListener(spnOnItemSelected);
 
         RadioGroup radioGroup = (RadioGroup)findViewById(R.id.pet_gender);
-        RadioButton male = (RadioButton)findViewById(R.id.male);
-        RadioButton female = (RadioButton)findViewById(R.id.female);
         RadioGroupListener listener =new RadioGroupListener();
         radioGroup.setOnCheckedChangeListener(listener);
         rej = (TextView) findViewById(R.id.reject_code);

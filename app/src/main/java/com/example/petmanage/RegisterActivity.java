@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -122,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = settings.Get_reg_email();
                 String phone = settings.Get_reg_phone();
 
-                /*if(!account.matches(".*[a-zA-Z].*" )|| account.length() < 8){
+                if(!account.matches(".*[a-zA-Z].*" )|| account.length() < 8){
                     Toast.makeText(RegisterActivity.this, "account should be include at least a letter and at least 8 character", Toast.LENGTH_SHORT).show();
                     //pr.setText("login error");
                     return;
@@ -146,7 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "phone format is incorrect ", Toast.LENGTH_SHORT).show();
                     //pr.setText("login error");
                     return;
-                }*/
+                }
                 InputMethodManager imm = (InputMethodManager) getSystemService(RegisterActivity.INPUT_METHOD_SERVICE); imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 thread = new Thread(Connection);
                 thread.start();

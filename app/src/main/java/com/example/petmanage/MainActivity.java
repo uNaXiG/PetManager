@@ -121,6 +121,10 @@ public class MainActivity extends AppCompatActivity {
         ImageView profile = (ImageView) headerView.findViewById(R.id.profile);
         profile.setImageBitmap(setting.get_profile());
 
+        String pets[] = new String[setting.Get_Pet_Info().size()];
+        for(int i = 0; i < setting.Get_Pet_Info().size(); i++) pets[i]=setting.Get_Pet_Info().get(i).Name;
+
+
         navView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.item_info:      // 選擇個人資料
@@ -140,8 +144,30 @@ public class MainActivity extends AppCompatActivity {
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
 
-                case R.id.item_healthy:
-
+                case R.id.item_healthy: // 健康
+                    // 初始化寵物名單陣列 //
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                    builder1.setTitle("您要填寫哪隻寵物的健康評估呢？"); //設置它的標題
+                    final int[] x1 = {0};
+                    builder1.setSingleChoiceItems(pets,0,new DialogInterface.OnClickListener() {
+                        //把它設置為單選的型態
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            x1[0] = i;
+                        }
+                    });
+                    builder1.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            setting.Set_Select_Pet(x1[0]);
+                            Intent go_to_healthy = new Intent();
+                            go_to_healthy.setClass(MainActivity.this, Healthy.class);   // 跳轉到健康頁面
+                            startActivity(go_to_healthy);
+                            //關閉滑動選單
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }
+                    });
+                    builder1.create().show(); //也是一樣記得創建他並顯示
                     break;
 
                 case R.id.item_analyze:   // 情緒
@@ -151,26 +177,20 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.item_diary:      // 日記
 
                     // 初始化寵物名單陣列 //
-                    String pets[] = new String[setting.Get_Pet_Info().size()];
-                    for(int i = 0; i < setting.Get_Pet_Info().size(); i++) pets[i]=setting.Get_Pet_Info().get(i).Name;
-
-                    final int[] x = {0};
                     AlertDialog.Builder builder=new AlertDialog.Builder(this);
                     builder.setTitle("您要看哪隻寵物的日記呢？"); //設置它的標題
+                    final int[] x = {0};
                     builder.setSingleChoiceItems(pets,0,new DialogInterface.OnClickListener() {
                         //把它設置為單選的型態
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             x[0] = i;
-                            //Toast.makeText(MainActivity.this, "選擇了" + pets[i], Toast.LENGTH_SHORT).show();
-                            //提醒使用者點選了選項
                         }
                     });
                     builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             setting.Set_Select_Pet(x[0]);
-                            Toast.makeText(MainActivity.this, "選擇了" + x[0], Toast.LENGTH_SHORT).show();
                             thread2 =  new Thread(RequestToGetDiary);
                             thread2.start();
 
