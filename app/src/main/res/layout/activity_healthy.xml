@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/manycat"
     android:layout_width="match_parent"
+<<<<<<< HEAD
     android:layout_height="match_parent"
     android:background="@drawable/manycat"
     tools:context=".Healthy">
@@ -268,6 +270,225 @@
     </LinearLayout>
         <Button
             android:id="@+id/submit"
+=======
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/liner_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/first_layout"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="30dp"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="#555"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:id="@+id/back"
+                android:drawableLeft="@drawable/pointer_left"
+                android:text="健康管理     " />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#555"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="濕食乾食" />
+            <!-- 濕食乾食 -->
+            <Spinner
+                android:id="@+id/spinner_eat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#88ffffff"
+                android:padding="20dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#555"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="食物份量" />
+            <!-- 吃的量 -->
+            <Spinner
+                android:id="@+id/spinner_eatnum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#88ffffff"
+                android:padding="20dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#555"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="軟便硬便" />
+            <!-- 軟便硬便 -->
+            <Spinner
+                android:id="@+id/spinner_shit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#88ffffff"
+                android:padding="20dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#555"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="攝取水量" />
+            <!-- 喝水量 -->
+            <Spinner
+                android:id="@+id/spinner_drink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#88ffffff"
+                android:padding="20dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#555"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="小便次數" />
+            <!-- 尿尿次數 -->
+            <Spinner
+                android:id="@+id/spinner_pee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#88ffffff"
+                android:padding="20dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#555"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="活力" />
+            <!-- 活力 -->
+            <Spinner
+                android:id="@+id/spinner_energy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#88ffffff"
+                android:padding="20dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/save_btn"
+>>>>>>> fe983705810ac817cf09bffd91d607072d41452b
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -286,7 +507,10 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="#888"/>
+<<<<<<< HEAD
 
+=======
+>>>>>>> fe983705810ac817cf09bffd91d607072d41452b
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -294,6 +518,7 @@
             android:gravity="center"
             android:orientation="horizontal">
             <TextView
+<<<<<<< HEAD
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/health_result"
@@ -304,6 +529,28 @@
         </LinearLayout>
 
     </LinearLayout>
+=======
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:textColor="#555"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/iv_avatar"
+                android:text="今日健康狀況" />
+            <TextView
+                android:textStyle="bold"
+                android:textSize="50dp"
+                android:textColor="	#FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/iv_avatar"
+                android:text="正 常" />
+        </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+>>>>>>> fe983705810ac817cf09bffd91d607072d41452b
 
 
 </RelativeLayout>
