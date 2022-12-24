@@ -144,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
 
-<<<<<<< HEAD
                 case R.id.item_healthy: // 健康
                     // 初始化寵物名單陣列 //
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
@@ -169,15 +168,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                     builder1.create().show(); //也是一樣記得創建他並顯示
-=======
-                case R.id.item_healthy:
-                    Intent go_to_healthy = new Intent();
-                    go_to_healthy.setClass(MainActivity.this, Healthy.class);   // 跳轉到健康頁面
-                    startActivity(go_to_healthy);
-                    //關閉滑動選單
-                    drawerLayout.closeDrawer(GravityCompat.START);
->>>>>>> fe983705810ac817cf09bffd91d607072d41452b
-                    break;
+
 
                 case R.id.item_analyze:   // 情緒
 
