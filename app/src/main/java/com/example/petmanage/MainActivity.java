@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Thread thread;  // send edited profile info
     private Thread thread2; // to get pet profile
+    private Thread thread3; // to get pet healthy
+
     String server_ip;   // 伺服器IP
     int server_port;       // port number
     private Socket clientSocket;    //客戶端的socket
@@ -146,8 +148,38 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.item_healthy: // 健康
                     // 初始化寵物名單陣列 //
+                    AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                    builder2.setTitle("您要管理哪隻寵物的健康紀錄呢？"); //設置它的標題
+                    final int[] x2 = {0};
+                    builder2.setSingleChoiceItems(pets,0,new DialogInterface.OnClickListener() {
+                        //把它設置為單選的型態
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            x2[0] = i;
+                        }
+                    });
+                    builder2.setNegativeButton("確定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            setting.Set_Select_Pet(x2[0]);
+                            thread3 =  new Thread(RequestToGetHealthy);
+                            thread3.start();
+
+                        }
+                    });
+                    builder2.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            return;
+                        }
+                    });
+                    builder2.create().show(); //也是一樣記得創建他並顯示
+
+                    break;
+                case R.id.item_analyze:   // 情緒
+                    // 初始化寵物名單陣列 //
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                    builder1.setTitle("您要填寫哪隻寵物的健康評估呢？"); //設置它的標題
+                    builder1.setTitle("您要填寫哪隻寵物的情緒分析呢？"); //設置它的標題
                     final int[] x1 = {0};
                     builder1.setSingleChoiceItems(pets,0,new DialogInterface.OnClickListener() {
                         //把它設置為單選的型態
@@ -156,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                             x1[0] = i;
                         }
                     });
-                    builder1.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                    builder1.setNegativeButton("確定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             setting.Set_Select_Pet(x1[0]);
@@ -167,11 +199,13 @@ public class MainActivity extends AppCompatActivity {
                             drawerLayout.closeDrawer(GravityCompat.START);
                         }
                     });
+                    builder1.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            return;
+                        }
+                    });
                     builder1.create().show(); //也是一樣記得創建他並顯示
-
-
-                case R.id.item_analyze:   // 情緒
-
                     break;
 
                 case R.id.item_diary:      // 日記
@@ -187,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                             x[0] = i;
                         }
                     });
-                    builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton("確定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             setting.Set_Select_Pet(x[0]);
@@ -196,6 +230,12 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     });
+                    builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
                     builder.create().show(); //也是一樣記得創建他並顯示
                     break;
 
@@ -349,6 +389,49 @@ public class MainActivity extends AppCompatActivity {
             thread.start();
         }
     }
+
+    // 取得健康紀錄的執行續 //
+    private Runnable RequestToGetHealthy = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                InetAddress host = InetAddress.getByName(server_ip);
+                //建立連線
+                clientSocket = new Socket(host, server_port);
+
+                // 向 server 發送訊息
+                out = new PrintWriter(new BufferedWriter( new OutputStreamWriter(clientSocket.getOutputStream())),true);
+                // 接收 server 發來的訊息
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+                out.println("/get_healthy/" + setting.Get_Pet_Info().get(setting.Get_Select_Pet()).PetId);
+                String response = "";
+                response = in.readLine();
+
+                if(response.split("/")[1].equals("get_healthy_response")){
+                    Pet.healthy_title = response.split("/")[2].split("_");
+                    Pet.healthy_content = response.split("/")[3].split("_");
+                    Pet.healthy_score = response.split("/")[4].split("_");
+
+                    Intent go_to_manage = new Intent();
+                    go_to_manage.setClass(MainActivity.this, PetHealthManage.class);   // 跳轉到健康頁面
+                    startActivity(go_to_manage);
+                    //關閉滑動選單
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+                else if(response.split("/")[1].equals("empty_healthy")){
+                    Intent go_to_manage = new Intent();
+                    go_to_manage.setClass(MainActivity.this, PetHealthManage.class);   // 跳轉到健康頁面
+                    startActivity(go_to_manage);
+                    //關閉滑動選單
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+            }
+            catch (Exception e){}
+        }
+    };
+
+
 
     private Runnable RequestToGetDiary = new Runnable() {
         @Override

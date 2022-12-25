@@ -17,6 +17,10 @@ public class Pet {
     public static String[] diary_content;
     public static String[] diary_profile;
 
+    public static String[] healthy_title;
+    public static String[] healthy_content;
+    public static String[] healthy_score;
+
     public static int Select_Diary;
     public Pet(){ }
 

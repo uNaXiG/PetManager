@@ -52,7 +52,7 @@ public class Healthy extends AppCompatActivity {
     BufferedReader in;
 
     Spinner spinner;
-    String eat_res, pupu_res;
+    String eat_res = "罐罐", pupu_res = "硬便";
     EditText eat_count, water_count, urine_count;
     TextView title, result;
 
@@ -75,7 +75,7 @@ public class Healthy extends AppCompatActivity {
 
         // 標題 /
         title = (TextView)findViewById(R.id.health_title);
-        title.setText(settings.Get_Pet_Info().get(settings.Get_Select_Pet()).Name + "的健康管理");
+        title.setText(settings.Get_Pet_Info().get(settings.Get_Select_Pet()).Name + "的情緒分析");
 
 
         // 吃的 //
@@ -117,7 +117,7 @@ public class Healthy extends AppCompatActivity {
             public void onClick(View view) {
                 if(eat_count.getText().toString().isEmpty() || water_count.getText().toString().isEmpty() || urine_count.getText().toString().isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(Healthy.this);
-                    builder.setTitle("健康管理");
+                    builder.setTitle("情緒分析");
                     builder.setMessage("若有空白未輸入數值，系統將忽略不計，但會影響一定程度的準確性喔，請問依然要送出嗎？");
                     builder.setIcon(R.drawable.icon);
                     builder.setPositiveButton("否", new DialogInterface.OnClickListener() {
@@ -164,8 +164,8 @@ public class Healthy extends AppCompatActivity {
             msg_reject.createNotificationChannel(channel);
         }
         notify_reject = new NotificationCompat.Builder(this,"web")
-                .setContentTitle("健康管理")
-                .setContentText(settings.Get_Pet_Info().get(settings.Get_Select_Pet()).Name + "今天已經回報過囉！")
+                .setContentTitle("情緒分析")
+                .setContentText(settings.Get_Pet_Info().get(settings.Get_Select_Pet()).Name + "今天已經分析過囉！")
                 .setSmallIcon(R.mipmap.app_icon)
                 .setLargeIcon(edit_fail)
                 .build();
@@ -176,12 +176,12 @@ public class Healthy extends AppCompatActivity {
         public void onCheckedChanged(RadioGroup group,int checkedID)
         {
             // 吃的
-            if(checkedID == R.id.wet) eat_res = "wet";
-            else if(checkedID == R.id.dry) eat_res = "dry";
+            if(checkedID == R.id.wet) eat_res = "罐罐";
+            else if(checkedID == R.id.dry) eat_res = "乾飼料";
 
             // 便便
-            if(checkedID == R.id.hard) pupu_res = "hard";
-            else if(checkedID == R.id.soft) pupu_res = "soft";
+            if(checkedID == R.id.hard) pupu_res = "硬便";
+            else if(checkedID == R.id.soft) pupu_res = "軟便";
 
         }
     }
@@ -198,7 +198,6 @@ public class Healthy extends AppCompatActivity {
 
         }
     };
-
 
     private Runnable Connection=new Runnable(){
         @Override
