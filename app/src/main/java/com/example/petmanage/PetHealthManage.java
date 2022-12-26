@@ -135,6 +135,7 @@ public class PetHealthManage extends AppCompatActivity {
             first_layout.addView(tx2);
 
 
+            //test
             MaterialButton b = new MaterialButton(this);
             LinearLayout.LayoutParams btn_params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
