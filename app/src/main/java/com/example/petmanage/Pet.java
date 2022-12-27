@@ -20,6 +20,8 @@ public class Pet {
     public static String[] healthy_title;
     public static String[] healthy_content;
     public static String[] healthy_score;
+    public static String[] healthy_medical;
+
 
     public static int Select_Diary;
     public Pet(){ }

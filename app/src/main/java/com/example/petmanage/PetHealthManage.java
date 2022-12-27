@@ -14,12 +14,32 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 public class PetHealthManage extends AppCompatActivity {
 
     Settings setting;
 
     String[] title, content, score;
     LinearLayout layout;
+
+    public  static int sel_idx;
+    public static String sel_title, sel_date, sel_remark;
+
+    private Thread thread;
+    String server_ip;   // 伺服器IP
+    int server_port;       // port number
+    private Socket clientSocket;    //客戶端的socket
+
+    PrintWriter out;
+    BufferedReader in;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +48,8 @@ public class PetHealthManage extends AppCompatActivity {
         transparentStatusBar();
 
         setting = (Settings) getApplicationContext();
+        server_ip = setting.Get_IP();
+        server_port = setting.Get_Port();
 
         layout = (LinearLayout) findViewById(R.id.layout);
 
@@ -35,6 +57,10 @@ public class PetHealthManage extends AppCompatActivity {
         TextView view_title = (TextView) findViewById(R.id.title_text);
         view_title.setText(setting.Get_Pet_Info().get(setting.Get_Select_Pet()).Name + " 的健康管理");
 
+        sel_idx = 0;
+        sel_title = "";
+        sel_date = "";
+        sel_remark = "";
         try{
 
             title = Pet.healthy_title.clone();
@@ -69,12 +95,7 @@ public class PetHealthManage extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
-
     }
-
 
     private void Set_Visual(){
         for(int i = 0; i < title.length; i++){
@@ -149,7 +170,14 @@ public class PetHealthManage extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     int v = view.getId();
-                    Toast.makeText(PetHealthManage.this, "select : " + title[v] + " " + setting.Get_Pet_Info().get(v).PetId , Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(PetHealthManage.this, "select : " + title[v] + " " + setting.Get_Pet_Info().get(setting.Get_Select_Pet()).PetId , Toast.LENGTH_SHORT).show();
+                    sel_idx = v;
+                    sel_title = "編輯" + setting.Get_Pet_Info().get(setting.Get_Select_Pet()).Name + "的就醫紀錄";
+                    sel_date = title[sel_idx];
+                    sel_remark = Pet.healthy_medical[sel_idx].equals("<empty>")? "" : Pet.healthy_medical[v];
+                    Intent go_to_Medical = new Intent();
+                    go_to_Medical.setClass(PetHealthManage.this, MedicalRecord.class);
+                    startActivity(go_to_Medical);
                 }
             });
             first_layout.addView(b);

@@ -7,101 +7,85 @@
     android:background="@drawable/benz_cat"
     tools:context=".WriteDiary">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/title_layout">
-        <LinearLayout
+        android:id="@+id/l1"
+        android:gravity="right"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:drawableLeft="@drawable/pointer_left"
-                        android:id="@+id/cancel_btn"
-                        android:background="#0000000"
-                        android:textSize="18dp"
-                        android:textColor="#000"/>
-                </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:gravity="center"
-                    android:text="新增廖宥翔的就醫紀錄"
-                    android:textStyle="bold"
-                    android:textSize="30dp"
-                    android:id="@+id/medical_title"/>
-            </LinearLayout>
-        </LinearLayout>
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="新增廖宥翔的就醫紀錄"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:id="@+id/medical_title"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/bar"
+        android:background="@color/black"
+        android:layout_below="@+id/l1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
     <LinearLayout
         android:id="@+id/liner_layout_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="130dp"
-        android:gravity="center"
+        android:layout_below="@+id/bar"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/medical_input_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/title_layout"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="#0000000"
-            android:gravity="top"
-            android:hint="Input date"
-            android:textSize="25dp" />
-        <EditText
-            android:id="@+id/medical_input_place"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/title_layout"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@null"
-            android:gravity="top"
-            android:hint="   Input place"
-            android:textSize="25dp" />
-        <EditText
-            android:id="@+id/medical_input_content"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:layout_below="@+id/title_layout"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@null"
-            android:gravity="top"
-            android:hint="   Input content"
-            android:textSize="25dp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:background="#77FFFFFF">
+            <TextView
+                android:id="@+id/medical_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_layout"
+                android:padding="15dp"
+                android:gravity="top"
+                android:hint="Date here"
+                android:textSize="25dp" />
+        </LinearLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="430dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#77FFFFFF">
+            <EditText
+                android:id="@+id/medical_remark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/title_layout"
+                android:padding="15dp"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="Remark :"
+                android:textSize="25dp" />
+        </ScrollView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="horizontal">
@@ -114,7 +98,6 @@
                 android:fontFamily="casual"
                 android:textSize="22dp"
                 android:layout_marginRight="20dp"
-                android:layout_gravity="right"
                 android:textColor="@color/black"
                 android:text="Save"/>
             <Button

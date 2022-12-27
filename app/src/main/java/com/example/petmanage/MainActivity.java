@@ -412,6 +412,7 @@ public class MainActivity extends AppCompatActivity {
                     Pet.healthy_title = response.split("/")[2].split("_");
                     Pet.healthy_content = response.split("/")[3].split("_");
                     Pet.healthy_score = response.split("/")[4].split("_");
+                    Pet.healthy_medical = response.split("/")[5].split("_");
 
                     Intent go_to_manage = new Intent();
                     go_to_manage.setClass(MainActivity.this, PetHealthManage.class);   // 跳轉到健康頁面
