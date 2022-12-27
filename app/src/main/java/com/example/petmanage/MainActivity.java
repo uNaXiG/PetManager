@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private Thread thread;  // send edited profile info
     private Thread thread2; // to get pet profile
     private Thread thread3; // to get pet healthy
+    private Thread thread4; // to remove pet info
 
     String server_ip;   // 伺服器IP
     int server_port;       // port number
@@ -297,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
             imgv.setId(i);
             imgv.setImageBitmap(pet_profile);       // 只差從server取得base64後存進 setting.pet_profile List中，然後根據索引i取出bitmap
             // 修改寵物圖片 //
-            imgv.setOnClickListener(new View.OnClickListener() {
+            /*imgv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     ArrayList<Pet> p = new ArrayList<Pet>(setting.Get_Pet_Info());
@@ -309,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
                     setting.Set_Select_Pet(v);
                     iv = (ImageView) findViewById(v);
                 }
-            });
+            });*/
             parent_layout.addView(imgv);
 
             // 新增一個垂直布局 //
@@ -348,18 +349,40 @@ public class MainActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             btn_params.setMargins(80,0,80,20);
             b.setLayoutParams(btn_params);
-            b.setBackgroundColor(Color.parseColor("#AAEBD090"));
-            b.setTextColor(Color.parseColor("#8B6020"));
-            Drawable edit_icon = getResources().getDrawable(R.drawable.edit);
+            b.setBackgroundColor(Color.parseColor("#A0C00000"));
+            b.setTextColor(Color.parseColor("#ffffff"));
+            Drawable edit_icon = getResources().getDrawable(R.drawable.remove);
             edit_icon.setBounds(0, 0, edit_icon.getMinimumWidth(), edit_icon.getMinimumHeight());
             b.setCompoundDrawables(null,null,edit_icon,null);
-            b.setText("      編    輯");
+            b.setText("      刪    除");
             b.setId(i);
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     int v = view.getId();
                     setting.Set_Select_Pet(v);
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("刪除寵物");
+                    builder.setMessage("確定要將 " + setting.Get_Pet_Info().get(v).Name + " 的寵物資料與其錄移除嗎？");
+                    builder.setIcon(R.drawable.icon);
+                    builder.setPositiveButton("否", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            return;
+                        }
+                    });
+                    builder.setNegativeButton("是", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            thread4 = new Thread(RemovePet);
+                            thread4.start();
+                        }
+                    });
+                    builder.create().show();
+
+
                 }
             });
             first_layout.addView(b);
@@ -389,6 +412,37 @@ public class MainActivity extends AppCompatActivity {
             thread.start();
         }
     }
+
+    // 刪除寵物 //
+    private Runnable RemovePet = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                InetAddress host = InetAddress.getByName(server_ip);
+                //建立連線
+                clientSocket = new Socket(host, server_port);
+
+                // 向 server 發送訊息
+                out = new PrintWriter(new BufferedWriter( new OutputStreamWriter(clientSocket.getOutputStream())),true);
+                // 接收 server 發來的訊息
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+                out.println("/remove_pet/" + setting.Get_Pet_Info().get(setting.Get_Select_Pet()).PetId + "/" + setting.Get_reg_account());
+                String response = "";
+                response = in.readLine();
+                if(response.split("/")[1].equals("success")){
+                    setting.Set_pets(response.split("/")[2]);
+                    // 前往應用程式主頁面 //
+                    Intent intent = new Intent();
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setClass(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+            }
+            catch (Exception ex){ finish(); }
+        }
+    };
 
     // 取得健康紀錄的執行續 //
     private Runnable RequestToGetHealthy = new Runnable() {
@@ -432,8 +486,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-
-
+    // 取得寵物日記 //
     private Runnable RequestToGetDiary = new Runnable() {
         @Override
         public void run() {
@@ -470,6 +523,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    // 取得寵物圖片//
     private Runnable Connection = new Runnable(){
         @Override
         public void run() {
