@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/alarmbg"
+    tools:context=".AlarmSetting">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/title"
+            android:textSize="28dp"
+            android:textColor="#FFEE9050"
+            android:textStyle="bold"
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:gravity="center"
+            android:text="寵物Peter的餵食提醒"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/display_time"
+            android:textSize="60dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textColor="#FFEE9050"
+            android:textStyle="bold"
+            android:background="#88FFFFFF"
+            android:text="07 : 00"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="20dp"
+            android:textColor="#FFC07000"
+            android:textStyle="bold"
+            android:background="#88FFFFFF"
+            android:text="貼心提醒：設定餵食時間可以有效照顧到寵物的飲食健康喔，如果寵物吃飯時間不正常，可能會影響腸胃，最後可以會造成寵物的慢性病，建議飼主多多利用此功能，也希望各位飼主的寵物都能吃得健康，心情才會好！"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/set_alarm"
+                android:textSize="18dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="60dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:backgroundTint="#66FFFFFF"
+                android:textColor="#FFEE9000"
+                android:textStyle="bold"
+                android:text="設定餵食"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cancel"
+                android:textSize="18dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="60dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:backgroundTint="#66FFFFFF"
+                android:textColor="#FFEE9000"
+                android:textStyle="bold"
+                android:text=" 取    消 "/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

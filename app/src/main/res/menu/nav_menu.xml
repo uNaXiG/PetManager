@@ -12,6 +12,10 @@
                 android:icon="@drawable/pet_manager"
                 android:title="登錄寵物" />
             <item
+                android:id="@+id/item_alarm"
+                android:icon="@drawable/feed_alarm"
+                android:title="設定餵食" />
+            <item
                 android:id="@+id/item_healthy"
                 android:icon="@drawable/healthy"
                 android:title="健康管理" />

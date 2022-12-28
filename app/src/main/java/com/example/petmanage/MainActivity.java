@@ -147,6 +147,39 @@ public class MainActivity extends AppCompatActivity {
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
 
+                case R.id.item_alarm:   // 設定餵食時間
+                    // 初始化寵物名單陣列 //
+                    AlertDialog.Builder builder3 = new AlertDialog.Builder(this);
+                    builder3.setTitle("您要設定哪隻寵物的餵食提醒呢？"); //設置它的標題
+                    final int[] x3 = {0};
+                    builder3.setSingleChoiceItems(pets,0,new DialogInterface.OnClickListener() {
+                        //把它設置為單選的型態
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            x3[0] = i;
+                        }
+                    });
+                    builder3.setNegativeButton("確定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            setting.Set_Select_Pet(x3[0]);
+                            Intent go_to_alarm = new Intent();
+                            go_to_alarm.setClass(MainActivity.this, AlarmSetting.class);   // 跳轉到編輯資料頁面
+                            startActivity(go_to_alarm);
+                            //關閉滑動選單
+                            drawerLayout.closeDrawer(GravityCompat.START);
+
+
+                        }
+                    });
+                    builder3.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            return;
+                        }
+                    });
+                    builder3.create().show(); //也是一樣記得創建他並顯示
+                    break;
                 case R.id.item_healthy: // 健康
                     // 初始化寵物名單陣列 //
                     AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
