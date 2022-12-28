@@ -75,14 +75,15 @@ public class AlarmSetting extends AppCompatActivity {
                 Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
                 intent.putExtra(AlarmClock.EXTRA_HOUR, Integer.parseInt(hour));
                 intent.putExtra(AlarmClock.EXTRA_MINUTES, Integer.parseInt(min));
+                intent.putExtra(AlarmClock.EXTRA_MESSAGE, title.getText().toString());
+                startActivity(intent);
 
-                //intent.putExtra(AlarmClock.EXTRA_MESSAGE, title.getText().toString());
-                if(intent.resolveActivity(getPackageManager()) != null){
+                /*if(intent.resolveActivity(getPackageManager()) != null){
                     startActivity(intent);
                 }
                 else{
                     Toast.makeText(AlarmSetting.this, "您裝置並無可以支援餵食提醒功能的APP", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
 
